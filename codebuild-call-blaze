@@ -1,3 +1,8 @@
+# Actually this file is yacback/codebuild-verify-delivery.
+#
+# So these comments and code are superfluous. I'll leave them
+# online for a few hours for reference.
+#
 # Make sure CodeBuild can see and call this file.
 # This file's return code will be either 408 (Blaze can't find yacback) or 0.
 # Usage in CodeBuild: 
