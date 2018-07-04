@@ -1,0 +1,6 @@
+# Make sure CodeBuild can see and call this file.
+# This file's return code will be either 408 (Blaze can't find yacback) or 0.
+# Usage in CodeBuild: 
+# The IP is hardcoded for now.
+export TEMP=`curl -s 54.149.91.181:8076/checkurl?test=yacbacktest1`
+if [ $TEMP == "timeout" ]; then exit 408; else exit 0; fi
