@@ -15,6 +15,7 @@ Simulate Blazemeter but within a firewall.
 ```
 git clone https://github.com/craigwongva/blazemeter
 cd /home/ec2-user/environment/blazemeter
+./upsert-route53
 export GOROOT=/usr/local/go
 export GOPATH=`pwd`
 export PATH=$PATH:$GOROOT/bin
