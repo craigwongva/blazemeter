@@ -1,9 +1,4 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Parameters:
-  githubpassword:
-    Type: String
-  browser:
-    Type: String
 Resources:
   TomcatInstanceRole:
     Type: AWS::IAM::Role
