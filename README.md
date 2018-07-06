@@ -25,6 +25,7 @@ go install blaze
 ## Tests
 
 ## Usage
+aws cloudformation create-stack --stack-name blaze801 --template-body file://cf.yml --region us-west-2
 
 ## Teardown
 Delete the c9 instance.
