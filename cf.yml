@@ -1,0 +1,102 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+  githubpassword:
+    Type: String
+  browser:
+    Type: String
+Resources:
+  TomcatInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: YacbackTomcatInstanceRole-${AWS::StackName}
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ec2.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Policies:
+        -
+          PolicyName: "TomcatInstanceRoleAccessPolicy"
+          PolicyDocument:
+            Version: "2012-10-17"        
+            Statement:
+              - 
+                Effect: "Allow"
+                Action:
+                  - "logs:*"
+                Resource:
+                  - "*"
+              - 
+                Effect: "Allow"
+                Action:
+                  - "s3:*"
+                Resource:
+                  - "arn:aws:s3:::aws-codedeploy-us-east-1/latest/*"
+                  - Fn::Sub: arn:aws:s3:::${ArtifactStoreBucket}/*                  
+              - 
+                Effect: "Allow"
+                Action:
+                  - "route53:*"
+                Resource:
+                  - "*"
+              - 
+                Effect: "Allow"
+                Action:
+                  - "ec2:*"
+                Resource:
+                  - "*"
+      Path: "/"      
+  TomcatProfileUnref:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - !Ref TomcatInstanceRole
+      InstanceProfileName: 
+        Fn::Sub: TomcatProfile-${AWS::StackName}
+  TomcatSecGrp:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: vpc-a0383dc5
+      GroupDescription: dummy01
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+      - CidrIp: 173.242.16.106/32
+        FromPort: 8080
+        IpProtocol: tcp
+        ToPort: 8080
+      - CidrIp: 68.100.234.63/32
+        FromPort: 8080
+        IpProtocol: tcp
+        ToPort: 8080        
+  StageEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      IamInstanceProfile: 
+        Fn::Sub: TomcatProfile-${AWS::StackName}
+      KeyName: oregonkeypair
+      SecurityGroupIds: 
+        - !Ref TomcatSecGrp
+      UserData:
+        Fn::Base64:
+          Fn::Join:
+            - ""
+            -
+              - "#!/bin/bash -ex\n"
+              - "yum install git -y\n"
+              - "sudo -u ec2-user bash -c 'cd /home/ec2-user; git clone https://"
+              - "github.com/craigwongva/blazemeter'\n"
+              - "sudo -u ec2-user bash -c 'cd /home/ec2-user/blazemeter; ./userdata/install &> /tmp/userdata-install\n"
+      InstanceType: t2.micro
+      ImageId: ami-32d8124a
+      Tags:
+        - Key: Name
+          Value: 
+            Fn::Sub: YacbackStageEC2Instance-${AWS::StackName}

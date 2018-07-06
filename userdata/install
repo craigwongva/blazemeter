@@ -1,0 +1,7 @@
+cd /home/ec2-user/blazemeter
+./upsert-route53
+export GOROOT=/usr/local/go
+export GOPATH=`pwd`
+export PATH=$PATH:$GOROOT/bin
+go install blaze
+./bin/blaze &

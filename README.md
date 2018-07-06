@@ -21,8 +21,6 @@ export GOPATH=`pwd`
 export PATH=$PATH:$GOROOT/bin
 go install blaze
 ./bin/blaze
-#-->Manually open security group so that yacback can talk to Blaze and vice versa.
-./userdata/golang/install <dbpassword> $GOPATH
 
 ## Tests
 
