@@ -21,7 +21,7 @@ export GOPATH=`pwd`
 export PATH=$PATH:$GOROOT/bin
 go install blaze
 ./bin/blaze
-
+```
 ## Tests
 
 ## Usage
