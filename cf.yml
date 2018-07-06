@@ -32,7 +32,6 @@ Resources:
                   - "s3:*"
                 Resource:
                   - "arn:aws:s3:::aws-codedeploy-us-east-1/latest/*"
-                  - Fn::Sub: arn:aws:s3:::${ArtifactStoreBucket}/*                  
               - 
                 Effect: "Allow"
                 Action:
