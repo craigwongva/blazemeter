@@ -2,6 +2,11 @@
 #  IP_
 #  NICKNAME_
 #  SECGRP_
+#  ID
+
+# Sample CLI statements:
+#ID_BLAZE=`aws cloudformation describe-stack-resources --stack-name blaze804 --region us-west-2 | jq '.StackResources | .[].PhysicalResourceId' | grep "i-"`
+#IP_BLAZE=`aws ec2 describe-instances --region us-west-2 | jq ".Reservations | .[] | select((.Instances[].InstanceId | contains($ID_BLAZE))) | .Instances | .[].PublicIpAddress" | sed s/\"//g` 
 
 sudo yum install jq -y
 
