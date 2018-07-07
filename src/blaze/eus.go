@@ -8,6 +8,11 @@ import (
         "time"
 )
 
+func ping(w http.ResponseWriter, r *http.Request) {
+        ping := []byte("ping")
+        w.Write(ping)
+}
+
 func blaze(w http.ResponseWriter, r *http.Request) {
         tests, ok := r.URL.Query()["test"]
 

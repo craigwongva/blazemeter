@@ -1,0 +1,6 @@
+sudo yum install jq -y
+
+TEMP_BLAZE_SECGRP=`aws ec2 describe-security-groups --region us-west-2 | jq '.SecurityGroups | .[] | select((.GroupName | contains("BLAZEME"))) | .GroupId' | sed s/\"//g`
+
+aws ec2 authorize-security-group-ingress --group-id $TEMP_BLAZE_SECGRP --cidr 68.100.234.63/32 --port 8076 --protocol tcp --region us-west-2
+
