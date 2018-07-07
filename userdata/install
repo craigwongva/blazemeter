@@ -1,5 +1,10 @@
+export BLAZENICKNAME=$1
+
 cd /home/ec2-user/blazemeter
-./userdata/update-secgrp
+
+cp update-secgrp update-secgrp-temp
+sed -i s/BLAZEME/$BLAZENICKNAME/ update-secgrp-temp
+./userdata/update-secgrp-temp
 
 ./userdata/golang/install
 ./upsert-route53
