@@ -1,4 +1,6 @@
 cd /home/ec2-user/blazemeter
+./userdata/update-secgrp
+
 ./userdata/golang/install
 ./upsert-route53
 export GOROOT=/usr/local/go
