@@ -91,7 +91,7 @@ Resources:
               - "./userdata/install "
               - Fn::Sub: ${AWS::StackName}
               - " "
-              - "&> /tmp/userdata-install\n"
+              - "&> /tmp/userdata-install'\n"
       InstanceType: t2.micro
       ImageId: ami-32d8124a
       Tags:
