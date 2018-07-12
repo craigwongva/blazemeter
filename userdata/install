@@ -4,7 +4,7 @@ cd /home/ec2-user/blazemeter
 
 cp update-secgrp update-secgrp-temp
 sed -i s/BLAZEME/$BLAZENICKNAME/ update-secgrp-temp
-./userdata/update-secgrp-temp
+./update-secgrp-temp
 
 ./userdata/golang/install
 ./upsert-route53
