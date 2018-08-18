@@ -14,3 +14,5 @@ SECGRP_BLAZE=`aws ec2 describe-security-groups --region us-west-2 | jq '.Securit
 
 aws ec2 authorize-security-group-ingress --group-id $SECGRP_BLAZE --cidr 68.100.234.63/32 --port 8076 --protocol tcp --region us-west-2
 
+# Kludgey, because it's easier:
+aws ec2 authorize-security-group-ingress --group-id $SECGRP_BLAZE --cidr 98.174.223.247/32 --port 8076 --protocol tcp --region us-west-2
