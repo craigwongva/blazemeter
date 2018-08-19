@@ -1,0 +1,9 @@
+export stackname=$1
+#export githubpassword=$2
+
+aws cloudformation create-stack --stack-name $stackname \
+   --template-body file://cf.yml \
+   --region us-west-2 \
+   --capabilities CAPABILITY_NAMED_IAM
+
+#aws cloudformation validate-template --template-body file://cf.yml
