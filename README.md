@@ -26,7 +26,7 @@ go install blaze
 http://blaze.redf4rth.net:8076/ping
 
 ## Usage
-aws cloudformation create-stack --stack-name blaze801 --template-body file://cf.yml --region us-west-2
+aws cloudformation create-stack --stack-name blaze801 --template-body file://cf.yml --region us-west-2 --capabilities CAPABILITY_NAMED_IAM
 
 ## Teardown
 Delete the c9 instance.
